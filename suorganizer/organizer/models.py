@@ -10,7 +10,12 @@ class Tag(models.Model):
     slug = models.SlugField()
 
 class Startup(models.Model):
-    pass
+    name = models.CharField(max_length=31)
+    slug = models.SlugField()
+    description = models.TextField()
+    founded_date = models.DateField()
+    contact = models.EmailField()
+    website = models.URLField()
 
 class NewsLink(models.Model):
     pass
