@@ -15,8 +15,18 @@ class Post(models.Model):
     pub_date = models.DateField(
         'date published',
         auto_now_add=True)
-    tags = models.ManyToMany(
+    tags = models.ManyToManyField(
         Tag,
         related_name='blog_posts')
-    startups = models.ManyToMany(
+    startups = models.ManyToManyField(
         Startup, related_name='blog_posts')
+
+    def __str__(self):
+        return "{} on {}".format(
+            self.title,
+            self.pub_date.strftime('%Y-%m-%d'))
+
+    class Meta:
+        verbose_name = 'blog post'
+        ordering = ['-pub_date', 'title']
+        get_latest_by = 'pub_date'
