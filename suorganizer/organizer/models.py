@@ -53,5 +53,5 @@ class NewsLink(models.Model):
 
     class Meta:
         verbose_name = 'news article'
-        ordering = ['pub_date']
+        ordering = ['-pub_date']
         get_latest_by = 'pub_date'

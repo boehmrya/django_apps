@@ -1,6 +1,9 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
 
-from django.shortcuts import render
+from django.http.response import HttpResponse
 
-# Create your views here.
+from .models import Tag
+
+def homepage(request):
+    tag_list = Tag.objects.all()
+    output = ", ".join([tag.name for tag in tag_list])
+    return HttpResponse(output)
