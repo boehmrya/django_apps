@@ -11,13 +11,22 @@
 
     </ul>
   </section>
-{% else %}
-  <p>This tag is not related to any startups.</p>
 {% endif %}
 
+{% if tag.blog_posts.all %}
   <section>
     <h3>Blog Posts</h3>
     <ul>
-
+      {% for post in tag.blog_posts.all %}
+        <li><a href="">
+          {{ post.title }}
+        </a></li>
+      {% endfor %}
     </ul>
   </section>
+{% endif %}
+
+
+{% if not tag.startup_set.all and not tag.blog_posts.all %}
+  <p>This tag is not related to any content.</p>
+{% endif %}
