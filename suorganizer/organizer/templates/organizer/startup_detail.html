@@ -1,10 +1,11 @@
 <article>
+
   <h2>{{ startup.name }}</h2>
   <dl>
     <dt>Date Founded</dt>
-      <dd>{{ startup.founded_date }}</dd>
+      <dd>{{ startup.founded_date|date:"F jS, Y" }}</dd>
     <dt>Website</dt>
-      <dd>{{ startup.website }}</dd>
+      <dd>{{ startup.website|urlize }}</dd>
     <dt>Contact</dt>
       <dd>{{ startup.contact }}</dd>
 
@@ -14,9 +15,10 @@
             {{ tag.name|title }}
           </a></dd>
         {% endfor %}
+
   </dl>
 
-  <p>{{ startup.description }}</p>
+  {{ startup.description|linebreaks }}
 
     {% if startup.newslink_set.all %}
       <section>
