@@ -13,5 +13,8 @@ def homepage(request):
     return HttpResponse(output)
 
 
-def tag_detail(request):
-    return HttpResponse()
+def tag_detail(request, slug):
+    tag = Tag.objects.get(slug_iexact=slug)
+    template = loader.get_template('organizer/tag_detail.html')
+    context = Context({'tag': tag})
+    return HttpResponse(template.render(context))
