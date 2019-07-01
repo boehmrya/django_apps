@@ -21,4 +21,5 @@ from organizer import urls as organizer_urls
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^', include(organizer_urls)),
+    url(r'^blog/', include(blog_urls)),
 ]
