@@ -1,7 +1,7 @@
 
 from django.conf.urls import url
 
-from .views import (startup_list, tag_detail, tag_list)
+from .views import (startup_detail, startup_list, tag_detail, tag_list)
 
 urlpatterns = [
     url(r'^startup/$',
