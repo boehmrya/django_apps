@@ -10,7 +10,7 @@
   <article>
     <header>
       <h2>
-        <a href="">
+        <a href="{% url 'blog_post_detail' year=post.pub_date.year month=post.pub_date.month slug=post.slug %}">
           {{ post.title|title }}
         </a>
       </h2>
