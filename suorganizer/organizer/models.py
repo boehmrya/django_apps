@@ -13,6 +13,9 @@ class Tag(models.Model):
         unique=True,
         help_text="A label for URL config.")
 
+    def get_absolute_url(self):
+        return reverse('organizer_tag_detail', kwargs={'slug': self.slug})
+
     def __str__(self):
         return self.name
 
@@ -33,6 +36,9 @@ class Startup(models.Model):
     contact = models.EmailField()
     website = models.URLField(max_length=255)
     tags = models.ManyToManyField(Tag)
+
+    def get_absolute_url(self):
+        return reverse('organizer_startup_detail', kwargs={'slug': self.slug})
 
     def __str__(self):
         return self.name
