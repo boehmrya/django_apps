@@ -1,4 +1,5 @@
 
+from django.core.exceptions import ValidationError
 from django import forms
 
 class TagForm(forms.Form):
@@ -10,3 +11,12 @@ class TagForm(forms.Form):
             name=self.cleaned_data['name'],
             slug=self.cleaned_data['slug'])
         return new_tag
+
+    def clean_name(self):
+        return self.cleaned_data['name'].lower()
+
+    def clean_slug(self):
+        new_slug = self.cleaned_data['slug'].lower()
+        if new_slug == 'create':
+            raise ValidationError('Slug may not be "create".')
+        return new_slug
