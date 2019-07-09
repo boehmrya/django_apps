@@ -6,21 +6,13 @@ from .models import Post
 from django.views.generic import View
 
 class PostList(View):
+    template_name = 'blog/post_list.html'
 
     def get(self, request):
         return render(
             request,
             'blog/post_list.html',
             {'post_list': Post.objects.all()})
-
-
-'''
-def post_list(request):
-    return render(
-        request,
-        'blog/post_list.html',
-        {'post_list': Post.objects.all()})
-'''
 
 def post_detail(request):
     post = get_object_or_404(
