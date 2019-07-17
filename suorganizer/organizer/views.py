@@ -31,6 +31,7 @@ def tag_detail(request, slug):
         'organizer/tag_detail.html',
         {'tag': tag})
 
+
 def tag_create(request):
     if request.method == 'POST':
         form = TagForm(request.POST)
@@ -40,3 +41,25 @@ def tag_create(request):
     else:
         form = TagForm()
     return render(request, 'organizer/tag_form.html', {'form': form})
+
+
+class TagCreate(View):
+    form_class = TagForm
+    template_name = 'organizer/tag_form.html'
+
+    def get(self, request):
+        return render(request,
+            self.template_name,
+            {'form': self.form_class() })
+
+    def post(self, request):
+        bound_form = self.form_class(request.POST)
+        if bound_form.is_valid():
+            new_tag = bound_form.save()
+            return redirect(new_tag)
+        else:
+            return render(request,
+                self.template_name,
+                {'form': bound_form})
+
+                
