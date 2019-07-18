@@ -1,9 +1,8 @@
 
 from django.shortcuts import (get_object_or_404, redirect, render)
-
+from django.views.generic import View
 from .models import Post
 from .forms import PostForm
-from django.views.generic import View
 
 class PostList(View):
     template_name = 'blog/post_list.html'
