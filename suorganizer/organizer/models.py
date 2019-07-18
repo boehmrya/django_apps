@@ -32,15 +32,15 @@ class Startup(models.Model):
     website = models.URLField(max_length=255)
     tags = models.ManyToManyField(Tag)
 
-    def get_absolute_url(self):
-        return reverse('organizer_startup_detail', kwargs={'slug': self.slug})
-
     def __str__(self):
         return self.name
 
     class Meta:
         ordering = ['name']
         get_latest_by = 'founded_date'
+
+    def get_absolute_url(self):
+        return reverse('organizer_startup_detail', kwargs={'slug': self.slug})
 
 
 class NewsLink(models.Model):
@@ -56,3 +56,6 @@ class NewsLink(models.Model):
         verbose_name = 'news article'
         ordering = ['-pub_date']
         get_latest_by = 'pub_date'
+
+    def get_absolute_url(self):
+        return self.startup.get_absolute_url()

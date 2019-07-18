@@ -1,7 +1,7 @@
 
 from django.shortcuts import (get_object_or_404, redirect, render)
 from .models import Startup, Tag
-from .forms import TagForm
+from .forms import (NewsLinkForm, StartupForm, TagForm)
 
 
 def startup_list(request):
@@ -32,17 +32,6 @@ def tag_detail(request, slug):
         {'tag': tag})
 
 
-def tag_create(request):
-    if request.method == 'POST':
-        form = TagForm(request.POST)
-        if form.is_valid():
-            new_tag = form.save()
-            return redirect(new_tag)
-    else:
-        form = TagForm()
-    return render(request, 'organizer/tag_form.html', {'form': form})
-
-
 class TagCreate(View):
     form_class = TagForm
     template_name = 'organizer/tag_form.html'
@@ -62,4 +51,41 @@ class TagCreate(View):
                 self.template_name,
                 {'form': bound_form})
 
-                
+class StartupCreate(View):
+    form_class = StartupForm
+    template_name = 'organizer/startup_form.html'
+
+    def get(self, request):
+        return render(request,
+            self.template_name,
+            {'form': self.form_class() })
+
+    def post(self, request):
+        bound_form = self.form_class(request.POST)
+        if bound_form.is_valid():
+            new_startup = bound_form.save()
+            return redirect(new_startup)
+        else:
+            return render(request,
+                self.template_name,
+                {'form': bound_form})
+
+
+class NewsLinkCreate(View):
+    form_class = NewsLinkForm
+    template_name = 'organizer/newslink_form.html'
+
+    def get(self, request):
+        return render(request,
+            self.template_name,
+            {'form': self.form_class() })
+
+    def post(self, request):
+        bound_form = self.form_class(request.POST)
+        if bound_form.is_valid():
+            new_newslink = bound_form.save()
+            return redirect(new_newslink)
+        else:
+            return render(request,
+                self.template_name,
+                {'form': bound_form})
