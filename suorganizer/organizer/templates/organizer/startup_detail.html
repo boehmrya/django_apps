@@ -33,8 +33,9 @@
         <h3>Recent News</h3>
         <ul>
           {% for newslink in startup.newslink_set.all %}
-            <li><a href="{{ newslink.link }}">
-              {{ newslink.title|title }}</a>
+            <li>
+              <a href="{{ newslink.link }}">{{ newslink.title|title }}</a> |
+              <a href="{{ newslink.get_update_url }}">Edit Link</a>
             </li>
           {% endfor %}
         </ul>
@@ -47,8 +48,7 @@
         <ul>
           {% for post in startup.blog_posts.all %}
             <li>
-              <a href="{{ post.get_absolute_url }}">
-              {{ post.title|title }}</a>
+              <a href="{{ post.get_absolute_url }}">{{ post.title|title }}</a>
             </li>
           {% endfor %}
         </ul>
