@@ -1,7 +1,7 @@
 
 from django.conf.urls import url
 
-from .views import (NewsLinkCreate, StartupCreate, TagCreate, startup_detail,
+from .views import (NewsLinkCreate, NewsLinkUpdate, StartupCreate, TagCreate, startup_detail,
     startup_list, tag_detail, tag_list)
 
 urlpatterns = [
