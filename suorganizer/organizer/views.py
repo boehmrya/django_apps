@@ -3,7 +3,7 @@ from django.shortcuts import (get_object_or_404, redirect, render)
 from django.views.generic import View
 from .models import Startup, Tag
 from .forms import (NewsLinkForm, StartupForm, TagForm)
-from .utils import ObjectCreateMixin
+from .utils import (ObjectCreateMixin, ObjectUpdateMixin)
 
 
 def startup_list(request):
@@ -41,9 +41,21 @@ class TagCreate(ObjectCreateMixin, View):
     template_name = 'organizer/tag_form.html'
 
 
+class TagUpdate(ObjectUpdateMixin, View):
+    form_class = TagForm
+    model = Tag
+    template_name = 'organizer/tag_form_update.html'
+
+
 class StartupCreate(ObjectCreateMixin, View):
     form_class = StartupForm
     template_name = 'organizer/startup_form.html'
+
+
+class StartupUpdate(ObjectUpdateMixin, View):
+    form_class = StartupForm
+    model = Startup
+    template_name = 'organizer/startup_form_update.html'
 
 
 class NewsLinkCreate(ObjectCreateMixin, View):

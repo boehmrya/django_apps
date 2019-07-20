@@ -1,8 +1,8 @@
 
 from django.conf.urls import url
 
-from .views import (NewsLinkCreate, NewsLinkUpdate, StartupCreate, TagCreate, startup_detail,
-    startup_list, tag_detail, tag_list)
+from .views import (NewsLinkCreate, NewsLinkUpdate, StartupCreate, StartupUpdate,
+    TagCreate, TagUpdate, startup_detail, startup_list, tag_detail, tag_list)
 
 urlpatterns = [
     url(r'^startup/$',
@@ -17,9 +17,15 @@ urlpatterns = [
     url(r'tag/create/$',
         TagCreate.as_view(),
         name='organizer_tag_create'),
+    url(r'tag/(?P<slug>[\w\-]+)/update/$',
+        TagUpdate.as_view(),
+        name='organizer_tag_update'),
     url(r'startup/create/$',
         StartupCreate.as_view(),
         name='organizer_startup_create'),
+    url(r'startup/(?P<slug>[\w\-]+)/update/$',
+        StartupUpdate.as_view(),
+        name='organizer_startup_update'),
     url(r'newslink/create/$',
         NewsLinkCreate.as_view(),
         name='organizer_newslink_create'),
