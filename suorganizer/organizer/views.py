@@ -7,34 +7,46 @@ from .utils import (ObjectCreateMixin, ObjectUpdateMixin, ObjectDeleteMixin)
 from django.core.urlresolvers import reverse_lazy
 
 
-def startup_list(request):
-    return render(
-        request,
-        'organizer/startup_list.html',
-        {'startup_list': Startup.objects.all()})
+class StartupList(View):
+    template_name = 'organizer/startup_list.html'
+
+    def get(self, request):
+        return render(
+            request,
+            self.template_name,
+            {'startup_list': Startup.objects.all()})
 
 
-def startup_detail(request, slug):
-    startup = get_object_or_404(Startup, slug__iexact=slug)
-    return render(
-        request,
-        'organizer/startup_detail.html',
-        {'startup': startup})
+class StartupDetail(View):
+    template_name = 'organizer/startup_detail.html'
+
+    def get(self, request, slug):
+        startup = get_object_or_404(Startup, slug__iexact=slug)
+        return render(
+            request,
+            'organizer/startup_detail.html',
+            {'startup': startup})
 
 
-def tag_list(request):
-    return render(
-        request,
-        'organizer/tag_list.html',
-        {'tag_list': Tag.objects.all()})
+class TagList(View):
+    template_name = 'organizer/tag_list.html'
+
+    def get(self, request):
+        return render(
+            request,
+            'organizer/tag_list.html',
+            {'tag_list': Tag.objects.all()})
 
 
-def tag_detail(request, slug):
-    tag = get_object_or_404(Tag, slug__iexact=slug)
-    return render(
-        request,
-        'organizer/tag_detail.html',
-        {'tag': tag})
+class TagDetail(View):
+    template_name = 'organizer/tag_detail.html'
+
+    def get(self, request, slug):
+        tag = get_object_or_404(Tag, slug__iexact=slug)
+        return render(
+            request,
+            'organizer/tag_detail.html',
+            {'tag': tag})
 
 
 class TagCreate(ObjectCreateMixin, View):
