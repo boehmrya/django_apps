@@ -17,7 +17,7 @@ class PostList(View):
 class PostDetail(View):
     template_name = 'blog/post_detail.html'
 
-    def get(self, request):
+    def get(self, request, year, month, slug):
         post = get_object_or_404(
             Post,
             pub_date__year=year,
@@ -86,7 +86,7 @@ class PostUpdate(View):
 class PostDelete(View):
     template_name = 'blog/post_confirm_delete.html'
 
-    def get(self, request):
+    def get(self, request, year, month, slug):
         post = get_object_or_404(
             Post,
             pub_date__year=year,
@@ -96,3 +96,12 @@ class PostDelete(View):
             request,
             self.template_name,
             {'post': post})
+
+    def post(self, request, year, month, slug):
+        post = get_object_or_404(
+            Post,
+            pub_date__year=year,
+            pub_date__month=month,
+            slug=slug)
+        post.delete()
+        return redirect('blog_post_list')

@@ -5,12 +5,6 @@
 {{ block.super }} - Tag Detail
 {% endblock %}
 
-<ul>
-  <li>
-    <a href="{{ tag.get_update_url }}">Edit Tag</a>
-  </li>
-</ul>
-
 {% block content %}
 <h2>{{ tag.name|title }}</h2>
 {% if tag.startup_set.all %}
@@ -48,4 +42,13 @@
 {% if not tag.startup_set.all and not tag.blog_posts.all %}
   <p>This tag is not related to any content.</p>
 {% endif %}
+
+<ul>
+  <li>
+    <a href="{{ tag.get_update_url }}">Edit Tag</a>
+  </li>
+  <li>
+    <a href="{{ tag.get_delete_url }}">Delete Tag</a>
+  </li>
+</ul>
 {% endblock %}
