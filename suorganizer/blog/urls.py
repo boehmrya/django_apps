@@ -1,7 +1,7 @@
 
 from django.conf.urls import url
 
-from .views import (PostCreate, PostList, PostUpdate, post_detail)
+from .views import (PostCreate, PostDetail, PostList, PostUpdate, PostDelete)
 
 urlpatterns = [
     url(r'^$',
@@ -10,7 +10,7 @@ urlpatterns = [
     url(r'^(?P<year>\d{4})/'
         r'(?P<month>\d{1,2})/'
         r'(?P<slug>[\w\-]+)/$',
-        post_detail,
+        PostDetail.as_view(),
         name='blog_post_detail'),
     url(r'^create/$',
         PostCreate.as_view(),
@@ -21,5 +21,10 @@ urlpatterns = [
         r'update/$',
         PostUpdate.as_view(),
         name='blog_post_update'),
-
+    url(r'^(?P<year>\d{4})/'
+        r'(?P<month>\d{1,2})/'
+        r'(?P<slug>[\w\-]+)/'
+        r'delete/$',
+        PostDelete.as_view(),
+        name='blog_post_delete'),
 ]
