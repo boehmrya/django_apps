@@ -7,6 +7,17 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
+    def add_tag_data(apps, schema_editor):
+        Tag = apps.get_model('organizer', 'Tag')
+        for tag_name, tag_slug in TAGS:
+            Tag.objects.create(name = tag_name, slug = tag_slug)
+
+    def remove_tag_data(apps, schema_editor):
+        Tag = apps.get_model('organizer', 'Tag')
+        for _, tag_slug in TAGS:
+            tag = Tag.objects.get(slug = tag_slug)
+            tag.delete()
+
     dependencies = [
         ('organizer', '0001_initial'),
     ]
@@ -18,13 +29,8 @@ class Migration(migrations.Migration):
     TAGS = (
         #(tag name, tag slug),
         ("augmented reality", "augmented-reality"),
+        ("virtual reality", "virtual-reality"),
+        ("gis", "gis"),
+        ("web development", "web-development"),
+        ("system administration", "system-administration"),
     )
-
-    def add_tag_data(apps, schema_editor):
-        Tag = apps.get_model('organizer', 'Tag')
-        for tag_name, tag_slug in TAGS:
-            Tag.objects.create(name = tag_name, slug = tag_slug)
-
-    def remove_tag_data(apps, schema_editor):
-        Tag = apps.get_model('organizer', 'Tag')
-        Tag.objects.all().delete()
