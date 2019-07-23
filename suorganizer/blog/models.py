@@ -17,9 +17,12 @@ class Post(models.Model):
         auto_now_add=True)
     tags = models.ManyToManyField(
         Tag,
+        blank=True,
         related_name='blog_posts')
     startups = models.ManyToManyField(
-        Startup, related_name='blog_posts')
+        Startup,
+        blank=True,
+        related_name='blog_posts')
 
     def get_absolute_url(self):
         return reverse('blog_post_detail',
