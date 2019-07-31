@@ -32,9 +32,7 @@ class ContactForm(forms.Form):
             mail_managers(full_reason, body)
         except BadHeaderError:
             self.add_error(None, ValidationError(
-                'Could Not Send Email.\n'
-                'Extra Headers not allowed '
-                'in email body.',
+                'Could Not Send Email.\nExtra Headers not allowed in email body.',
                 code = 'badheader'))
             return False
         else:
